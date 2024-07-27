@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:rhymer_app/ui/ui.dart';
 
 @RoutePage()
 class HistoryPage extends StatelessWidget {
@@ -9,9 +10,9 @@ class HistoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(
+    return CustomScrollView(
       slivers: [
-        SliverAppBar(
+        const SliverAppBar(
           centerTitle: true,
           floating: true,
           // pinned: true,
@@ -21,10 +22,23 @@ class HistoryPage extends StatelessWidget {
           surfaceTintColor: Colors.transparent,
           title: Text('История'),
         ),
-        SliverToBoxAdapter(child: SizedBox(height: 16)),
-        // SliverList.builder(
-        //   itemBuilder: (context, index) => const RhymeListCard(isFavorite: true),
-        // )
+        const SliverToBoxAdapter(child: SizedBox(height: 16)),
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          sliver: SliverGrid(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 1.6,
+              ),
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return RhymeHistoryCard(rhymes: [List.generate(3, (int index) => 'Рифма $index').toString()]);
+                },
+                childCount: 20,
+              )),
+        )
       ],
     );
   }

@@ -11,7 +11,7 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        const SliverAppBar(
+        SliverAppBar(
           centerTitle: true,
           floating: true,
           pinned: true,
@@ -19,10 +19,22 @@ class SearchPage extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.white,
           surfaceTintColor: Colors.transparent,
-          title: Text('Rhymer'),
+          title: const Text('Rhymer'),
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(70),
-            child: SearchButton(),
+            preferredSize: const Size.fromHeight(70),
+            child: SearchButton(
+              onTap: () {
+                showBottomSheet(
+                  backgroundColor: Colors.white,
+                  context: context,
+                  builder: (context) => const SizedBox(
+                    height: 500,
+                    width: double.infinity,
+                    child: Text('sssss'),
+                  ),
+                );
+              },
+            ),
           ),
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 16)),
@@ -42,7 +54,9 @@ class SearchPage extends StatelessWidget {
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 16)),
         SliverList.builder(
-          itemBuilder: (context, index) => const RhymeListCard(),
+          itemBuilder: (context, index) => const RhymeListCard(
+            rhyme: 'rhyme',
+          ),
         )
       ],
     );

@@ -2,13 +2,9 @@ import 'package:flutter/material.dart';
 
 class BaseContainer extends StatelessWidget {
   const BaseContainer(
-      {super.key,
-      required this.child,
-      required this.width,
-      this.margin,
-      this.padding = const EdgeInsets.only(left: 12)});
+      {super.key, required this.child, this.width, this.margin, this.padding = const EdgeInsets.only(left: 12)});
 
-  final double width;
+  final double? width;
   final Widget child;
   final EdgeInsets? margin;
   final EdgeInsets? padding;
@@ -21,7 +17,7 @@ class BaseContainer extends StatelessWidget {
       padding: padding,
       margin: margin,
       decoration: BoxDecoration(
-        color: theme.hintColor.withOpacity(0.1),
+        color: theme.cardColor,
         borderRadius: BorderRadius.circular(16),
       ),
       child: child,
